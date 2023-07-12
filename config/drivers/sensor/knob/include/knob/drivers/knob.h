@@ -7,7 +7,7 @@
 #define KNOB_INCLUDE_DRIVERS_KNOB_H_
 
 #include <stdbool.h>
-#include <device.h>
+#include <zephyr/device.h>
 
 /**
  * @file
@@ -37,6 +37,10 @@ void knob_set_enable(const struct device *dev, bool enable);
 void knob_set_encoder_report(const struct device *dev, bool report);
 
 bool knob_get_encoder_report(const struct device *dev);
+
+void knob_set_encoder_ppr(const struct device *dev, int ppr);
+
+int knob_get_encoder_ppr(const struct device *dev);
 
 void knob_set_position_limit(const struct device *dev, float min, float max);
 

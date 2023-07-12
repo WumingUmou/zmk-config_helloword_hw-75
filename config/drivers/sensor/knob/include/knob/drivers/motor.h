@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include <device.h>
+#include <zephyr/device.h>
 
 /**
  * @file
@@ -48,6 +48,8 @@ void motor_tick(const struct device *dev);
 void motor_set_enable(const struct device *dev, bool enable);
 
 void motor_set_torque_limit(const struct device *dev, float limit);
+
+float motor_get_torque_limit(const struct device *dev);
 
 void motor_set_angle_pid(const struct device *dev, float p, float i, float d);
 

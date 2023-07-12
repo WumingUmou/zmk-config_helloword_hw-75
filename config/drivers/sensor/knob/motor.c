@@ -5,8 +5,8 @@
 
 #define DT_DRV_COMPAT zmk_motor
 
-#include <device.h>
-#include <kernel.h>
+#include <zephyr/device.h>
+#include <zephyr/kernel.h>
 
 #include <knob/time.h>
 #include <knob/math.h>
@@ -16,7 +16,7 @@
 #include <knob/drivers/inverter.h>
 #include <knob/drivers/motor.h>
 
-#include <logging/log.h>
+#include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(motor, CONFIG_ZMK_LOG_LEVEL);
 
 #define MOTOR_VOLTAGE (12.0f)
@@ -294,6 +294,13 @@ void motor_set_torque_limit(const struct device *dev, float limit)
 
 	data->voltage_limit = CLAMP(limit, limit, MOTOR_VOLTAGE);
 	data->pid_velocity.limit = data->voltage_limit;
+}
+
+float motor_get_torque_limit(const struct device *dev)
+{
+	struct motor_data *data = dev->data;
+
+	return data->voltage_limit;
 }
 
 void motor_set_angle_pid(const struct device *dev, float p, float i, float d)

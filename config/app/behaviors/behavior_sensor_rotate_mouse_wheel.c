@@ -5,19 +5,20 @@
 
 #define DT_DRV_COMPAT zmk_behavior_sensor_rotate_mouse_wheel
 
-#include <device.h>
+#include <zephyr/device.h>
 #include <drivers/behavior.h>
 
-#include <logging/log.h>
+#include <zephyr/logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-#include <drivers/sensor.h>
+#include <zephyr/drivers/sensor.h>
 #include <app/hid_mouse.h>
 
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
 
 static int on_sensor_binding_triggered(struct zmk_behavior_binding *binding,
-				       const struct device *sensor, int64_t timestamp)
+				       const struct device *sensor,
+				       struct zmk_behavior_binding_event event)
 {
 	struct sensor_value value;
 	int err;
